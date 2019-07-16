@@ -1,4 +1,7 @@
 eclipse.preferences.version=1
 encoding//src/test/java=UTF-8
+encoding//src/test/java/com/senpay/serenity_cucumber/pages/AccountInfoPage.java=UTF-8
+encoding//src/test/java/com/senpay/serenity_cucumber/pages/HistoryTransactionPage.java=UTF-8
+encoding//src/test/java/com/senpay/serenity_cucumber/pages/TopupPage.java=UTF-8
 encoding//src/test/resources=UTF-8
 encoding/<project>=UTF-8

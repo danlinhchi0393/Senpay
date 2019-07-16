@@ -16,7 +16,7 @@ import com.senpay.serenity_cucumber.pages.LoginPage;
 
 import static org.hamcrest.Matchers.hasItem;
 
-public class HomeSteps {
+public class HomeSteps extends ScenarioSteps   {
 
     
     HomePage homepage;
