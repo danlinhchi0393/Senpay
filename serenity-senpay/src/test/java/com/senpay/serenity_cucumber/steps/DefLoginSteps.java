@@ -20,9 +20,9 @@ public class DefLoginSteps {
       login.is_the_login_page();
     }
 
-    @When("^The user input valid phone number and pincode and The user click Login button$")
-    public void the_user_input_valid_phone_number_and_pincode_and_the_user_click_login_button() throws Throwable {
-        login.login_with("0383584138", "123456");
+    @When("^The user input valid (.+) and (.+) and The user click Login button$")
+    public void the_user_input_valid_and_and_the_user_click_login_button(String phonenumber, String pincode) throws Throwable {
+        login.login_with(phonenumber, pincode);
     }
 
     @Then("^ The user should see homepage$")
