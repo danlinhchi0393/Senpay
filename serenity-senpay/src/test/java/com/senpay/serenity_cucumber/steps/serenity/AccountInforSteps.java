@@ -11,25 +11,25 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 
+import com.senpay.serenity_cucumber.pages.AccountInfoPage;
 import com.senpay.serenity_cucumber.pages.HomePage;
 import com.senpay.serenity_cucumber.pages.LoginPage;
 
 import static org.hamcrest.Matchers.hasItem;
 
-public class HomeSteps extends ScenarioSteps   {
+public class AccountInforSteps extends ScenarioSteps   {
 
     
-    HomePage homepage;
+	AccountInfoPage accountinfor;
+	HomePage homepage;
     
     @Step
-    public void choose_topup() {
-        homepage.chooseTransactions();
-        homepage.chooseTopup();
+    public int get_main_total_balance() {
+    	homepage.chooseAccount();
+         //homepage.chooseInfor_account();
+    	int total_balance = accountinfor.CheckWallet();
+        return total_balance;
     }
-    @Step
-    public void choose_infor_account() {
-        homepage.chooseTransactions();
-        homepage.chooseInfor_account();
-    }
+  
     
 }

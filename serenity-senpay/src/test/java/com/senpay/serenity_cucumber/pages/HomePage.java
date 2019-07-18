@@ -20,6 +20,8 @@ public class HomePage extends PageObject {
 	WebElement TabAccount;
 	@FindBy(css = "a.gdnt")
 	WebElement MenuTopup;
+	@FindBy(css = "a.tttk")
+	WebElement MenuInfor_account;
 
 
 	public void chooseTransactions() {
@@ -32,5 +34,8 @@ public class HomePage extends PageObject {
 
 	public void chooseTopup() {
 		MenuTopup.click();
+	}
+	public void chooseInfor_account() {
+		MenuInfor_account.click();
 	}
 }

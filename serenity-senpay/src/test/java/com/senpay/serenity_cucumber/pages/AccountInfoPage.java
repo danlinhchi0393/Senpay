@@ -9,7 +9,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class AccountInfoPage {
+import net.thucydides.core.pages.PageObject;
+
+public class AccountInfoPage  extends PageObject {
 
 	@FindBy (css = "#MainContent_lblAmount")
 	WebElement MainAmount;
@@ -22,7 +24,6 @@ public class AccountInfoPage {
 		String walletText = MainAmount.getText();
 		String walletText1 = walletText.replace(",", "");
 		int wallet = Integer.parseInt(walletText1);
-		System.out.print(wallet);
 		return wallet;
 	}
 	

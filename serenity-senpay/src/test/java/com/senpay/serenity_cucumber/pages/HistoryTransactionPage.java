@@ -8,7 +8,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-public class HistoryTransactionPage {
+
+import net.thucydides.core.pages.PageObject;
+public class HistoryTransactionPage  extends PageObject {
 
 
 	@FindBy(css = "select#MainContent_ddlTypeTransaction")

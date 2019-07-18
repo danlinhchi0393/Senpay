@@ -236,10 +236,39 @@ public class TopupPage extends PageObject  {
 	WebElement link_BIDV ;
 	@FindBy(css = "input#txtAmount_CardLink")
 	WebElement Amount_cardlink ;
+	@FindBy(css = "input#MainContent_Default1_btnAgree")
+	WebElement AgreeButton ;
+	@FindBy(css = "input#txt_otp_new")
+	WebElement OTP ;
+	
+	@FindBy(css ="input#MainContent_Default1_btnsubmitotp")
+	WebElement submit_button ;
+	
+	@FindBy(css = "span#MainContent_Default1_lbl_err_new")
+	WebElement error_message;
+	@FindBy(css = "span#MainContent_Default1_lbresult")
+	WebElement result_message;
 	public void Choose_link_BIDV() {
 		link_BIDV.click();
 	}
 	public void InputAmount_BIDV(String amount) {
 		Amount_cardlink.sendKeys(amount);
+	}
+	public void Choose_Agree_BIDV_button() {
+		AgreeButton.click();
+	}
+	public void Input_OTP(String OTPvalue) {
+		OTP.sendKeys(OTPvalue);
+	}
+	public void Choose_submit_bidv() {
+		submit_button.click();
+	}
+	public String Get_error_message() {
+		String error_message_value = error_message.getText();
+		return error_message_value;
+	}
+	public String Get_result_message() {
+		String result_message_value = result_message.getText();
+		return result_message_value;
 	}
 }
