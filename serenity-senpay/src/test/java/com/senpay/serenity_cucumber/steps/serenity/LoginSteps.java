@@ -1,5 +1,7 @@
 package com.senpay.serenity_cucumber.steps.serenity;
 
+
+import net.thucydides.core.annotations.Managed;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.steps.ScenarioSteps;
 
@@ -11,17 +13,18 @@ import java.util.concurrent.TimeUnit;
 
 import org.fluentlenium.adapter.util.SharedDriver;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
 import com.senpay.serenity_cucumber.pages.HomePage;
 import com.senpay.serenity_cucumber.pages.LoginPage;
 
-import static org.hamcrest.Matchers.hasItem;
+
 
 public class LoginSteps extends ScenarioSteps  {
 
    LoginPage loginPage;
    HomePage homepage;
-    
+   
     @Step
     public void choose_topup() {
         homepage.chooseTransactions();

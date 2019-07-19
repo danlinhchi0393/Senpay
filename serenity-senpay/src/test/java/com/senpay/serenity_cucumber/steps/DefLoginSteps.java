@@ -1,8 +1,10 @@
 package com.senpay.serenity_cucumber.steps;
 
+import net.thucydides.core.annotations.Managed;
 import net.thucydides.core.annotations.Steps;
 
 import org.junit.Assert;
+import org.openqa.selenium.WebDriver;
 
 import com.senpay.serenity_cucumber.steps.serenity.LoginSteps;
 
@@ -11,7 +13,8 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 public class DefLoginSteps extends PageSteps {
-
+	@Managed
+	   WebDriver driver;
 	@Steps
 	LoginSteps login;
 
