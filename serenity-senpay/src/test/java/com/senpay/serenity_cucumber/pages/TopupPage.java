@@ -248,6 +248,9 @@ public class TopupPage extends PageObject  {
 	WebElement error_message;
 	@FindBy(css = "span#MainContent_Default1_lbresult")
 	WebElement result_message;
+	
+	@FindBy(css = "span#MainContent_Default1_CustomValidatorddl")
+	WebElement message_validate_limit;
 	public void Choose_link_BIDV() {
 		link_BIDV.click();
 	}
@@ -270,5 +273,9 @@ public class TopupPage extends PageObject  {
 	public String Get_result_message() {
 		String result_message_value = result_message.getText();
 		return result_message_value;
+	}
+	public String Get_message_validate_limit() {
+		String message = message_validate_limit.getText();
+		return message;
 	}
 }

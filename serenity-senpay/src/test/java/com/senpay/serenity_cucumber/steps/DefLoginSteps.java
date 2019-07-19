@@ -10,25 +10,29 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-public class DefLoginSteps {
+public class DefLoginSteps extends PageSteps {
 
-    @Steps
-    LoginSteps login;
-    
-    @Given("^The user is staying login page$")
-    public void the_user_is_staying_login_page() throws Throwable {
-      login.is_the_login_page();
-    }
+	@Steps
+	LoginSteps login;
 
-    @When("^The user input valid (.+) and (.+) and The user click Login button$")
-    public void the_user_input_valid_and_and_the_user_click_login_button(String phonenumber, String pincode) throws Throwable {
-        login.login_with(phonenumber, pincode);
-    }
+	@Given("^The user is staying login page$")
+	public void the_user_is_staying_login_page() throws Throwable {
+		login.is_the_login_page();
+	}
 
-    @Then("^ The user should see homepage$")
-    public void the_user_should_see_homepage() throws Throwable {
-    	String Username = login.get_name_account();
+	@When("^The user input valid phone number and pincode and The user click Login button$")
+	public void the_user_input_valid_phone_number_and_pincode_and_the_user_click_login_button() throws Throwable {
+		if (this.Authenticated == false) {
+			login.login_with("0383584138", "123456");
+		} else {
+			login.login_with("0374441716", "123456");
+		}
+	}
+
+	@Then("^ The user should see homepage$")
+	public void the_user_should_see_homepage() throws Throwable {
+		String Username = login.get_name_account();
 		Assert.assertEquals("Nguyen Dan Linh Chi", Username);
-    }
+	}
 
 }

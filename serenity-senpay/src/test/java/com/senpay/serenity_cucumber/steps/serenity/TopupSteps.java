@@ -54,6 +54,15 @@ public class TopupSteps extends ScenarioSteps {
 				return true;
 			return false;
 	}
+		@Step
+		public boolean Check_message_validate_limit(String expect) {
+			getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+			String message_validate_limit = topup.Get_message_validate_limit();
+			//System.out.print(actual_result_message);
+			if (message_validate_limit.contentEquals(expect) == true)
+				return true;
+			return false;
+	}
 		
 		@Step
 		public void add_tab() {
@@ -62,5 +71,8 @@ public class TopupSteps extends ScenarioSteps {
 
 			getDriver().get("www.facebook.com");
 			getDriver().findElement(By.tagName("body")).sendKeys(Keys.CONTROL,"\t");
+			String title = getDriver().getTitle();
+			System.out.print(title);
+			getDriver().navigate().refresh();
 		}
 }
