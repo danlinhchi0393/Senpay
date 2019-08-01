@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.senpay.serenity_cucumber.steps.serenity.LoginSteps;
 
+import Common.GetOTP;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -32,8 +33,8 @@ public class DefLoginSteps extends PageSteps {
 		}
 	}
 
-	@Then("^ The user should see homepage$")
-	public void the_user_should_see_homepage() throws Throwable {
+	@Then("^The user should see homepage$")
+	public void the_user_should_see_homepage() throws Exception {
 		String Username = login.get_name_account();
 		Assert.assertEquals("Nguyen Dan Linh Chi", Username);
 	}

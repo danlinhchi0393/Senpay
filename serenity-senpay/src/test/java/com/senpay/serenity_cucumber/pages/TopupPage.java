@@ -251,6 +251,13 @@ public class TopupPage extends PageObject  {
 	
 	@FindBy(css = "span#MainContent_Default1_CustomValidatorddl")
 	WebElement message_validate_limit;
+	
+	
+	@FindBy(css = "#DivInfoAccount > div:nth-child(1)")
+	WebElement message_finish_transaction;
+	@FindBy(css = "#MainContent_Default1_message")
+	WebElement message_invalid_OTP_5times;
+
 	public void Choose_link_BIDV() {
 		link_BIDV.click();
 	}
@@ -276,6 +283,14 @@ public class TopupPage extends PageObject  {
 	}
 	public String Get_message_validate_limit() {
 		String message = message_validate_limit.getText();
+		return message;
+	}
+	public String Get_message_finish_transaction() {
+		String message = message_finish_transaction.getText();
+		return message;
+	}
+	public String Get_message_invalid_OTP_5times() {
+		String message = message_invalid_OTP_5times.getText();
 		return message;
 	}
 }

@@ -12,7 +12,9 @@ import net.thucydides.core.pages.PageObject;
 
 import java.util.List;
 
-@DefaultUrl("http://sandbox.senpay.vn")
+//@DefaultUrl("http://sandbox.senpay.vn")
+//@DefaultUrl("http://stagging.senpay.vn")
+@DefaultUrl("https://pilot.senpay.vn")
 
 public class LoginPage extends PageObject {
 	@FindBy (css = "input[type = tel]")

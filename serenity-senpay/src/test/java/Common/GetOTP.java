@@ -50,9 +50,9 @@ public static String GetOTP_From_BIDV() throws MalformedURLException {
 		//Set the Desired Capabilities
 		DesiredCapabilities caps = new DesiredCapabilities();
 		caps.setCapability("deviceName", "My Phone");
-		//caps.setCapability("udid", "0123456789ABCDEF"); //may chindl
+		caps.setCapability("udid", "0123456789ABCDEF"); //may chindl
 		//caps.setCapability("platformVersion", "4.4.2");
-		caps.setCapability("udid", "3300ccd2ec94c405"); // android trăng
+		//caps.setCapability("udid", "3300ccd2ec94c405"); // android trăng
 		caps.setCapability("platformVersion", "8.1.0");
 		caps.setCapability("platformName", "Android");
 		
@@ -60,9 +60,9 @@ public static String GetOTP_From_BIDV() throws MalformedURLException {
 		caps.setCapability("appActivity", "com.google.android.apps.messaging.ui.ConversationListActivity");
 		caps.setCapability("noReset", "true");
 		AppiumDriver<MobileElement> driver = new AndroidDriver<MobileElement>(new URL("http://0.0.0.0:4723/wd/hub"), caps);
-		//String Message = driver.findElement(By.xpath("//android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.TextView[1]")).getText();
+		String Message = driver.findElement(By.xpath("//android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.TextView[1]")).getText();
 		//Tin nhăn trong máy android trắng
-		String Message = driver.findElement(By.xpath("//android.widget.FrameLayout/android.widget.RelativeLayout/android.view.ViewGroup/android.support.v7.widget.RecyclerView/android.widget.FrameLayout[1]/android.widget.LinearLayout/android.widget.RelativeLayout/android.widget.TextView[2]")).getText();
+		//String Message = driver.findElement(By.xpath("//android.widget.FrameLayout/android.widget.RelativeLayout/android.view.ViewGroup/android.support.v7.widget.RecyclerView/android.widget.FrameLayout[1]/android.widget.LinearLayout/android.widget.RelativeLayout/android.widget.TextView[2]")).getText();
 		//System.out.print(Message);
 		String Compare = "nhap OTP";
 		int index = Message.indexOf(Compare);
@@ -72,6 +72,32 @@ public static String GetOTP_From_BIDV() throws MalformedURLException {
 				return OTPValue;
 		
 	}
- 
+public static String Get_message_transaction_From_BIDV() throws MalformedURLException {
+	
+	//Set the Desired Capabilities
+	DesiredCapabilities caps = new DesiredCapabilities();
+	caps.setCapability("deviceName", "My Phone");
+	caps.setCapability("udid", "0123456789ABCDEF"); //may chindl
+	//caps.setCapability("platformVersion", "4.4.2");
+	//caps.setCapability("udid", "3300ccd2ec94c405"); // android trăng
+	caps.setCapability("platformVersion", "8.1.0");
+	caps.setCapability("platformName", "Android");
+	
+	caps.setCapability("appPackage", "com.google.android.apps.messaging");
+	caps.setCapability("appActivity", "com.google.android.apps.messaging.ui.ConversationListActivity");
+	caps.setCapability("noReset", "true");
+	AppiumDriver<MobileElement> driver = new AndroidDriver<MobileElement>(new URL("http://0.0.0.0:4723/wd/hub"), caps);
+	String Message = driver.findElement(By.xpath("//android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.TextView[1]")).getText();
+	//Tin nhăn trong máy android trắng
+	//String Message = driver.findElement(By.xpath("//android.widget.FrameLayout/android.widget.RelativeLayout/android.view.ViewGroup/android.support.v7.widget.RecyclerView/android.widget.FrameLayout[1]/android.widget.LinearLayout/android.widget.RelativeLayout/android.widget.TextView[2]")).getText();
+	//System.out.print(Message);
+	String Compare = "tai BIDV";
+	int index = Message.indexOf(Compare);
+	//System.out.print(index);
+	String transaction_amount = Message.substring(index+9, index+19);
+	System.out.print(transaction_amount);
+			return transaction_amount;
+	
+} 
 }
 
