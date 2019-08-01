@@ -112,7 +112,7 @@ public class DefTopupSteps extends PageSteps {
 	 public void input_invalid_OTP_timeout_and_click_Agree_button() throws Exception {
 		String OTP = GetOTP.GetOTP_From_BIDV();
 		System.out.print(OTP);
-		Thread.sleep(180001);
+		Thread.sleep(120001);
 		topup.choose_submit_topup_by_link_BIDV_with(OTP);
 	    }
 	 
