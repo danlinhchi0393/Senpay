@@ -58,35 +58,64 @@ public class DefTopupSteps extends PageSteps {
 	public void input_invalid_OTP_and_click_Agree_button() throws Exception {
 		topup.choose_submit_topup_by_link_BIDV_with("123456");
 	}
-
-	@Then("^The user see error message for the first time$")
-    public void the_user_see_error_message_for_the_first_time() throws Throwable {
-		boolean result = topup.Check_message_input_invalid_OTP("OTP sai.\n" + "Bạn còn 2 lần nhập OTP");
-		Assert.assertEquals(true, result);
-		transaction_history.choose_topup_history();
-		boolean status = transaction_history.Check_status_topup("Khởi tạo");
-		Assert.assertEquals(true, status);
-
-	}
-	@Then("^The user see error message for the second time$")
-    public void the_user_see_error_message_for_the_second_time() throws Throwable {
-		topup.choose_submit_topup_by_link_BIDV_with("123456");
-		boolean result = topup.Check_message_input_invalid_OTP("OTP sai.\n" + "Bạn còn 1 lần nhập OTP");
-		Assert.assertEquals(true, result);
-		transaction_history.choose_topup_history();
-		boolean status = transaction_history.Check_status_topup("Khởi tạo");
-		Assert.assertEquals(true, status);
-    }
-
-	
-	// Nap tien thanh cong
-
 	@When("^Input valid OTP and click Agree button$")
 	public void input_valid_OTP_and_click_Agree_button() throws Exception {
 		String OTP = GetOTP.GetOTP_From_BIDV();
 		System.out.print(OTP);
 		topup.choose_submit_topup_by_link_BIDV_with(OTP);
 	}
+	@When("^The user enter the topup amount lower than the limit and click Next$")
+	public void the_user_enter_the_topup_amount_lower_than_the_limit_and_click_Next() throws Exception {
+
+		topup.choose_topup_by_link_BIDV_with("1000");
+	}
+	@When("^Input invalid OTP timeout and click Agree button$")
+	 public void input_invalid_OTP_timeout_and_click_Agree_button() throws Exception {
+		String OTP = GetOTP.GetOTP_From_BIDV();
+		System.out.print(OTP);
+		Thread.sleep(120001);
+		topup.choose_submit_topup_by_link_BIDV_with(OTP);
+	    }
+	@When("^The user enter the topup amount greater than the limit and click Next$")
+	public void the_user_enter_the_topup_amount_greater_than_the_limit_and_click_Next() throws Exception {
+		if (this.Authenticated == false) {
+			topup.choose_topup_by_link_BIDV_with("3000000");
+		} else
+			topup.choose_topup_by_link_BIDV_with("11000000");
+	}
+	@Then("^The user see error message for the first time$")
+    public void the_user_see_error_message_for_the_first_time() throws Throwable {
+		boolean result = topup.Check_message_input_invalid_OTP("OTP sai.\n" + "Bạn còn 4 lần nhập OTP");
+		Assert.assertEquals(true, result);
+
+	}
+	@Then("^The user see error message for the second time$")
+    public void the_user_see_error_message_for_the_second_time() throws Throwable {
+		boolean result = topup.Check_message_input_invalid_OTP("OTP sai.\n" + "Bạn còn 3 lần nhập OTP");
+		Assert.assertEquals(true, result);
+    }
+	@Then("^The user see error message for the third time$")
+	public void the_user_see_error_message_for_the_third_time() throws Exception {
+		boolean result = topup.Check_message_input_invalid_OTP("OTP sai.\n" + "Bạn còn 2 lần nhập OTP");
+		Assert.assertEquals(true, result);
+	}
+
+	@Then("^The user see error message for the fourth time$")
+	public void the_user_see_error_message_for_the_fourth_time() throws Exception {
+		boolean result = topup.Check_message_input_invalid_OTP("OTP sai.\n" + "Bạn còn 1 lần nhập OTP");
+		Assert.assertEquals(true, result);
+	}
+
+	@Then("^The user see error message for the fifth time$")
+	public void the_user_see_error_message_for_the_fifth_time() throws Exception {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new PendingException();
+	}
+
+	
+	// Nap tien thanh cong
+
+	
 
 	@Then("^Balance of wallet increases and Transaction has status successful$")
 	public void then_Balance_of_wallet_increases_and_Transaction_has_status_successful() throws Exception {
@@ -103,18 +132,7 @@ public class DefTopupSteps extends PageSteps {
 		Assert.assertEquals(message_transaction_from_BIDV, "-10,000VND");
 	}
 
-	@When("^The user enter the topup amount lower than the limit and click Next$")
-	public void the_user_enter_the_topup_amount_lower_than_the_limit_and_click_Next() throws Exception {
-
-		topup.choose_topup_by_link_BIDV_with("1000");
-	}
-	@When("^Input invalid OTP timeout and click Agree button$")
-	 public void input_invalid_OTP_timeout_and_click_Agree_button() throws Exception {
-		String OTP = GetOTP.GetOTP_From_BIDV();
-		System.out.print(OTP);
-		Thread.sleep(120001);
-		topup.choose_submit_topup_by_link_BIDV_with(OTP);
-	    }
+	
 	 
 	     // Write code here that turns the phrase above into concrete actions
 	 
@@ -154,11 +172,5 @@ public class DefTopupSteps extends PageSteps {
 		}
 	}
 
-	@When("^The user enter the topup amount greater than the limit and click Next$")
-	public void the_user_enter_the_topup_amount_greater_than_the_limit_and_click_Next() throws Exception {
-		if (this.Authenticated == false) {
-			topup.choose_topup_by_link_BIDV_with("3000000");
-		} else
-			topup.choose_topup_by_link_BIDV_with("11000000");
-	}
+	
 }
