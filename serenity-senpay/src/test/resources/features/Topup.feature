@@ -12,7 +12,7 @@ Background:
     And Input invalid OTP timeout and click Agree button 
     Then The user see error message topup unsuccessful
   @Test
-    Scenario: The User input invalid OTP for the five time
+    Scenario: The User input invalid OTP for the five time / 1 transaction
     Given The user choose topup by BIDV
     When The user input valid topup amount 
     And Input invalid OTP and click Agree button 
@@ -25,7 +25,10 @@ Background:
     Then The user see error message for the fourth time
     And Input invalid OTP and click Agree button
     Then The user see error message for the fifth time
-    
+    Given The user choose topup by BIDV
+    When The user input valid topup amount 
+    And Input invalid OTP and click Agree button 
+     Then The user see error message block OTP
    @Normal
     Scenario: The User should topup successful by BIDV
     Given The user choose topup by BIDV

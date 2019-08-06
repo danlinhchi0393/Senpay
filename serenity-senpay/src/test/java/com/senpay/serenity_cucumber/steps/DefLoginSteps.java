@@ -3,12 +3,15 @@ package com.senpay.serenity_cucumber.steps;
 import net.thucydides.core.annotations.Managed;
 import net.thucydides.core.annotations.Steps;
 
+import java.util.List;
+
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 
 import com.senpay.serenity_cucumber.steps.serenity.LoginSteps;
 
 import Common.GetOTP;
+import Common.ReadExcel;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -26,10 +29,13 @@ public class DefLoginSteps extends PageSteps {
 
 	@When("^The user input valid phone number and pincode and The user click Login button$")
 	public void the_user_input_valid_phone_number_and_pincode_and_the_user_click_login_button() throws Throwable {
+		List<String> test = ReadExcel.GetValue("Select * from Sheet1");
+		String username = test.get(0);
+		System.out.print(username);
 		if (this.Authenticated == false) {
-			login.login_with("0383584138", "123456");
+			login.login_with(username, "123456");
 		} else {
-			login.login_with("0374441716", "123456");
+			login.login_with(username, "123456");
 		}
 	}
 

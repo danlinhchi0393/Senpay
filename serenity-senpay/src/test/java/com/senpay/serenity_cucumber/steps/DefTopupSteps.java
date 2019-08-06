@@ -85,31 +85,31 @@ public class DefTopupSteps extends PageSteps {
 	}
 	@Then("^The user see error message for the first time$")
     public void the_user_see_error_message_for_the_first_time() throws Throwable {
-		boolean result = topup.Check_message_input_invalid_OTP("OTP sai.\n" + "Bạn còn 4 lần nhập OTP");
+		boolean result = topup.Check_message_input_invalid_OTP("Nhập sai OTP, vui lòng kiểm tra và nhập lại. Bạn còn 4 lần nhập OTP");
 		Assert.assertEquals(true, result);
 
 	}
 	@Then("^The user see error message for the second time$")
     public void the_user_see_error_message_for_the_second_time() throws Throwable {
-		boolean result = topup.Check_message_input_invalid_OTP("OTP sai.\n" + "Bạn còn 3 lần nhập OTP");
+		boolean result = topup.Check_message_input_invalid_OTP("Nhập sai OTP, vui lòng kiểm tra và nhập lại. Bạn còn 3 lần nhập OTP");
 		Assert.assertEquals(true, result);
     }
 	@Then("^The user see error message for the third time$")
 	public void the_user_see_error_message_for_the_third_time() throws Exception {
-		boolean result = topup.Check_message_input_invalid_OTP("OTP sai.\n" + "Bạn còn 2 lần nhập OTP");
+		boolean result = topup.Check_message_input_invalid_OTP("Nhập sai OTP, vui lòng kiểm tra và nhập lại. Bạn còn 2 lần nhập OTP");
 		Assert.assertEquals(true, result);
 	}
 
 	@Then("^The user see error message for the fourth time$")
 	public void the_user_see_error_message_for_the_fourth_time() throws Exception {
-		boolean result = topup.Check_message_input_invalid_OTP("OTP sai.\n" + "Bạn còn 1 lần nhập OTP");
+		boolean result = topup.Check_message_input_invalid_OTP("Nhập sai OTP, vui lòng kiểm tra và nhập lại. Bạn còn 1 lần nhập OTP");
 		Assert.assertEquals(true, result);
 	}
 
 	@Then("^The user see error message for the fifth time$")
 	public void the_user_see_error_message_for_the_fifth_time() throws Exception {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new PendingException();
+		boolean result = topup.Check_message_invalid_OTP_5times("Bạn đã nhập OTP sai quá 5 lần. Vui lòng thử lại sau!");
+		Assert.assertEquals(true, result);
 	}
 
 	
