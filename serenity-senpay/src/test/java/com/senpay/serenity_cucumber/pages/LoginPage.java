@@ -1,16 +1,13 @@
 package com.senpay.serenity_cucumber.pages;
 
-import net.thucydides.core.annotations.DefaultUrl;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import net.serenitybdd.core.pages.WebElementFacade;
-import java.util.stream.Collectors;
+
 
 import net.serenitybdd.core.annotations.findby.FindBy;
-
+import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.pages.PageObject;
-
-import java.util.List;
 
 @DefaultUrl("http://sandbox.senpay.vn")
 //@DefaultUrl("http://stagging.senpay.vn")

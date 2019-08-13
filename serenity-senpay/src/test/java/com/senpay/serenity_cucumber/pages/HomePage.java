@@ -22,8 +22,9 @@ public class HomePage extends PageObject {
 	WebElement MenuTopup;
 	@FindBy(css = "a.tttk")
 	WebElement MenuInfor_account;
-
-
+	
+	@FindBy(css = "a.gdrt")
+	WebElement MenuWithdraw;
 	public void chooseTransactions() {
 		TabTransaction.click();
 	}
@@ -37,5 +38,8 @@ public class HomePage extends PageObject {
 	}
 	public void chooseInfor_account() {
 		MenuInfor_account.click();
+	}
+	public void chooseWithdraw() {
+		MenuWithdraw.click();
 	}
 }

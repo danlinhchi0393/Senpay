@@ -10,6 +10,7 @@ import static org.hamcrest.core.Is.is;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
@@ -23,15 +24,23 @@ import com.senpay.serenity_cucumber.pages.HomePage;
 import com.senpay.serenity_cucumber.pages.LoginPage;
 import com.senpay.serenity_cucumber.pages.TopupPage;
 
+import cucumber.api.java.it.Data;
+
 import static org.hamcrest.Matchers.hasItem;
 
 public class TopupSteps extends ScenarioSteps {
 
 	TopupPage topup;
-
 	@Step
-	public void choose_topup_by_link_BIDV_with(String amount) {
+	public void choose_topup_by_link_BIDV() {
 		topup.Choose_link_BIDV();
+	}
+	@Step
+	public void choose_topup_by_link_VTB() {
+		topup.Choose_link_VTB();
+	}
+	@Step
+	public void choose_topup_by_link_with(String amount) {
 		topup.InputAmount_BIDV(amount);
 		topup.Choose_Agree_BIDV_button();
 	}
@@ -78,9 +87,9 @@ public class TopupSteps extends ScenarioSteps {
 			return false;
 	}
 		@Step
-		public boolean Check_message_invalid_OTP_5times(String expect) {
+		public boolean Check_message_invalid_transaction(String expect) {
 			getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-			String message_invalid_OTP_5times = topup.Get_message_invalid_OTP_5times();
+			String message_invalid_OTP_5times = topup.Get_message_invalid_transaction();
 			//System.out.print(actual_result_message);
 			if (message_invalid_OTP_5times.contentEquals(expect) == true)
 				return true;
@@ -107,9 +116,11 @@ public class TopupSteps extends ScenarioSteps {
 		        //Call getScreenshotAs method to create image file
 
 		                File SrcFile=scrShot.getScreenshotAs(OutputType.FILE);
-
+		                Date date=java.util.Calendar.getInstance().getTime();  
+		                System.out.println(date); 
+		               String folder=" e://test//";
 		            //Move image file to new destination
-		               String fileWithPath  ="e://test//test.png";
+		               String fileWithPath  = folder+date;
 		                File DestFile=new File(fileWithPath);
 
 		                //Copy file at destination

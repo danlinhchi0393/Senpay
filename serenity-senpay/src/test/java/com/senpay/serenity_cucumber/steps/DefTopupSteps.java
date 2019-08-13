@@ -43,31 +43,39 @@ public class DefTopupSteps extends PageSteps {
 	@Given("^The user choose topup by BIDV$")
 	public void the_user_choose_topup_by_BIDV() throws Exception {
 		// topup.add_tab();
-		topup.takeSnapShot();
+		//topup.takeSnapShot();
 		total_balance_old = account_infor.get_main_total_balance();
 		System.out.print(total_balance_old);
 		home.choose_topup();
+		topup.choose_topup_by_link_BIDV();
 	}
-
+	 @Given("^The user choose topup by ViettinBank$")
+	    public void the_user_choose_topup_by_viettinbank() throws Throwable {
+		 total_balance_old = account_infor.get_main_total_balance();
+			System.out.print(total_balance_old);
+			home.choose_topup();
+			topup.choose_topup_by_link_VTB();
+	    }
 	@When("^The user input valid topup amount$")
 	public void the_user_input_valid_topup_amount() throws Exception {
-		topup.choose_topup_by_link_BIDV_with("10000");
+		topup.choose_topup_by_link_with("10000");
 	}
 
 	@When("^Input invalid OTP and click Agree button$")
 	public void input_invalid_OTP_and_click_Agree_button() throws Exception {
-		topup.choose_submit_topup_by_link_BIDV_with("123456");
+		topup.choose_submit_topup_by_link_BIDV_with("111111");
 	}
 	@When("^Input valid OTP and click Agree button$")
 	public void input_valid_OTP_and_click_Agree_button() throws Exception {
-		String OTP = GetOTP.GetOTP_From_BIDV();
-		System.out.print(OTP);
-		topup.choose_submit_topup_by_link_BIDV_with(OTP);
+		//String OTP = GetOTP.GetOTP_From_BIDV();
+		//System.out.print(OTP);
+		//topup.choose_submit_topup_by_link_BIDV_with(OTP);
+		topup.choose_submit_topup_by_link_BIDV_with("123456");
 	}
 	@When("^The user enter the topup amount lower than the limit and click Next$")
 	public void the_user_enter_the_topup_amount_lower_than_the_limit_and_click_Next() throws Exception {
 
-		topup.choose_topup_by_link_BIDV_with("1000");
+		topup.choose_topup_by_link_with("1000");
 	}
 	@When("^Input invalid OTP timeout and click Agree button$")
 	 public void input_invalid_OTP_timeout_and_click_Agree_button() throws Exception {
@@ -79,9 +87,9 @@ public class DefTopupSteps extends PageSteps {
 	@When("^The user enter the topup amount greater than the limit and click Next$")
 	public void the_user_enter_the_topup_amount_greater_than_the_limit_and_click_Next() throws Exception {
 		if (this.Authenticated == false) {
-			topup.choose_topup_by_link_BIDV_with("3000000");
+			topup.choose_topup_by_link_with("3000000");
 		} else
-			topup.choose_topup_by_link_BIDV_with("11000000");
+			topup.choose_topup_by_link_with("11000000");
 	}
 	@Then("^The user see error message for the first time$")
     public void the_user_see_error_message_for_the_first_time() throws Throwable {
@@ -108,11 +116,15 @@ public class DefTopupSteps extends PageSteps {
 
 	@Then("^The user see error message for the fifth time$")
 	public void the_user_see_error_message_for_the_fifth_time() throws Exception {
-		boolean result = topup.Check_message_invalid_OTP_5times("Bạn đã nhập OTP sai quá 5 lần. Vui lòng thử lại sau!");
+		boolean result = topup.Check_message_invalid_transaction("Bạn đã nhập OTP sai quá 5 lần. Vui lòng thử lại sau!");
 		Assert.assertEquals(true, result);
 	}
 
-	
+	@Then("^The user see error message for the over number input OTP$")
+    public void the_user_see_error_message_for_the_over_number_input_otp() throws Throwable {
+		boolean result = topup.Check_message_invalid_transaction("Nhập sai OTP quá số lần xác thực. Vui lòng thực hiện lại");
+		Assert.assertEquals(true, result);
+    }
 	// Nap tien thanh cong
 
 	
@@ -150,7 +162,7 @@ public class DefTopupSteps extends PageSteps {
 		}
 	 @Then("^The user see error message block OTP$")
 	    public void the_user_see_error_message_block_otp() throws Throwable {
-		 boolean result = topup.Check_message_invalid_OTP_5times("Khóa OTP tạm thời do nhập sai OTP 5 lần liên tiếp. Vui lòng liên hệ ngân hàng để biết thêm thông tin.");
+		 boolean result = topup.Check_message_invalid_transaction("Khóa OTP tạm thời do nhập sai OTP 5 lần liên tiếp. Vui lòng liên hệ ngân hàng để biết thêm thông tin.");
 			Assert.assertEquals(true, result);
 			System.out.print("pass message");
 	    }   

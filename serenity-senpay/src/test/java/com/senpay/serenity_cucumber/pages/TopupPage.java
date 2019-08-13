@@ -231,9 +231,13 @@ public class TopupPage extends PageObject  {
 		AgreeTPbankbank.click();
 	}
 	
-//Ngân hang LK BIDV
+//Ngân hang LK 
 	@FindBy(css = "#link-img-bank-21 > img:nth-child(2)")
 	WebElement link_BIDV ;
+	
+	@FindBy(css = "#link-img-bank-9 > img:nth-child(2)")
+	WebElement link_VTB ;
+	
 	@FindBy(css = "input#txtAmount_CardLink")
 	WebElement Amount_cardlink ;
 	@FindBy(css = "input#MainContent_Default1_btnAgree")
@@ -256,10 +260,13 @@ public class TopupPage extends PageObject  {
 	@FindBy(css = "#DivInfoAccount > div:nth-child(1)")
 	WebElement message_finish_transaction;
 	@FindBy(css = "#MainContent_Default1_message")
-	WebElement message_invalid_OTP_5times;
+	WebElement message_invalid_transaction;
 
 	public void Choose_link_BIDV() {
 		link_BIDV.click();
+	}
+	public void Choose_link_VTB() {
+		link_VTB.click();
 	}
 	public void InputAmount_BIDV(String amount) {
 		Amount_cardlink.sendKeys(amount);
@@ -289,8 +296,8 @@ public class TopupPage extends PageObject  {
 		String message = message_finish_transaction.getText();
 		return message;
 	}
-	public String Get_message_invalid_OTP_5times() {
-		String message = message_invalid_OTP_5times.getText();
+	public String Get_message_invalid_transaction() {
+		String message = message_invalid_transaction.getText();
 		return message;
 	}
 }
