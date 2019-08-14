@@ -31,13 +31,20 @@ public class TransactionHistorySteps extends ScenarioSteps   {
         history_transaction.ChooseSearch();
     }
     @Step
-    public String get_status_transaction_topup() {
+    public void choose_withdraw_history() {
+    	homepage.chooseTransactions();
+        history_transaction.ChooseTypeTransaction();
+        history_transaction.ChooseWithdrawTransaction();
+        history_transaction.ChooseSearch();
+    }
+    @Step
+    public String get_status_transaction() {
     	String status = history_transaction.GetStatusTransaction();
     	return status;
     }
     @Step
 	public boolean Check_status_topup(String expect) {
-		String status = get_status_transaction_topup();
+		String status = get_status_transaction();
 		System.out.print(status);
 		if (status.contentEquals(expect) == true)
 			return true;

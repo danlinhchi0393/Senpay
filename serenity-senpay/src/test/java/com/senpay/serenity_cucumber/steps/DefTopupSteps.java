@@ -36,153 +36,82 @@ public class DefTopupSteps extends PageSteps {
 	TransactionHistorySteps transaction_history;
 
 	int total_balance_old;
-	//int amount = 10000;
-	//boolean Authenticated = false;
 
-	// nhap OTP sai 1 lan
-	@Given("^The user choose topup by BIDV$")
-	public void the_user_choose_topup_by_BIDV() throws Exception {
-		// topup.add_tab();
-		//topup.takeSnapShot();
-		total_balance_old = account_infor.get_main_total_balance();
-		System.out.print(total_balance_old);
+	@Given("^The user choose topup by ViettinBank$")
+	public void the_user_choose_topup_by_viettinbank() throws Throwable {
 		home.choose_topup();
-		topup.choose_topup_by_link_BIDV();
+		topup.choose_topup_by_link_VTB();
 	}
-	 @Given("^The user choose topup by ViettinBank$")
-	    public void the_user_choose_topup_by_viettinbank() throws Throwable {
-		 total_balance_old = account_infor.get_main_total_balance();
-			System.out.print(total_balance_old);
-			home.choose_topup();
-			topup.choose_topup_by_link_VTB();
-	    }
-	@When("^The user input valid topup amount$")
-	public void the_user_input_valid_topup_amount() throws Exception {
-		topup.choose_topup_by_link_with("10000");
+	@Given("^The user choose topup by agribank$")
+	public void the_user_choose_topup_by_agribank() throws Throwable {
+		home.choose_topup();
+		topup.choose_topup_by_link_agribank();
+	}
+	@When("^Input topup OTP timeout and click Agree button$")
+	public void input_invalid_topup_otp_timeout_and_click_agree_button() throws Throwable {
+		Thread.sleep(120001);
+		topup.choose_submit_topup_by_link_BIDV_with("12345");
 	}
 
-	@When("^Input invalid OTP and click Agree button$")
-	public void input_invalid_OTP_and_click_Agree_button() throws Exception {
-		topup.choose_submit_topup_by_link_BIDV_with("111111");
-	}
-	@When("^Input valid OTP and click Agree button$")
-	public void input_valid_OTP_and_click_Agree_button() throws Exception {
-		//String OTP = GetOTP.GetOTP_From_BIDV();
-		//System.out.print(OTP);
-		//topup.choose_submit_topup_by_link_BIDV_with(OTP);
-		topup.choose_submit_topup_by_link_BIDV_with("123456");
-	}
-	@When("^The user enter the topup amount lower than the limit and click Next$")
-	public void the_user_enter_the_topup_amount_lower_than_the_limit_and_click_Next() throws Exception {
-
-		topup.choose_topup_by_link_with("1000");
-	}
-	@When("^Input invalid OTP timeout and click Agree button$")
-	 public void input_invalid_OTP_timeout_and_click_Agree_button() throws Exception {
+	@When("^Input valid topup OTP and click Agree button$")
+	public void input_valid_topup_otp_and_click_agree_button() throws Throwable {
 		String OTP = GetOTP.GetOTP_From_BIDV();
 		System.out.print(OTP);
-		Thread.sleep(120001);
 		topup.choose_submit_topup_by_link_BIDV_with(OTP);
-	    }
-	@When("^The user enter the topup amount greater than the limit and click Next$")
-	public void the_user_enter_the_topup_amount_greater_than_the_limit_and_click_Next() throws Exception {
-		if (this.Authenticated == false) {
-			topup.choose_topup_by_link_with("3000000");
-		} else
-			topup.choose_topup_by_link_with("11000000");
-	}
-	@Then("^The user see error message for the first time$")
-    public void the_user_see_error_message_for_the_first_time() throws Throwable {
-		boolean result = topup.Check_message_input_invalid_OTP("Nhập sai OTP, vui lòng kiểm tra và nhập lại. Bạn còn 4 lần nhập OTP");
-		Assert.assertEquals(true, result);
-
-	}
-	@Then("^The user see error message for the second time$")
-    public void the_user_see_error_message_for_the_second_time() throws Throwable {
-		boolean result = topup.Check_message_input_invalid_OTP("Nhập sai OTP, vui lòng kiểm tra và nhập lại. Bạn còn 3 lần nhập OTP");
-		Assert.assertEquals(true, result);
-    }
-	@Then("^The user see error message for the third time$")
-	public void the_user_see_error_message_for_the_third_time() throws Exception {
-		boolean result = topup.Check_message_input_invalid_OTP("Nhập sai OTP, vui lòng kiểm tra và nhập lại. Bạn còn 2 lần nhập OTP");
-		Assert.assertEquals(true, result);
+		// topup.choose_submit_topup_by_link_BIDV_with("123456");
 	}
 
-	@Then("^The user see error message for the fourth time$")
-	public void the_user_see_error_message_for_the_fourth_time() throws Exception {
-		boolean result = topup.Check_message_input_invalid_OTP("Nhập sai OTP, vui lòng kiểm tra và nhập lại. Bạn còn 1 lần nhập OTP");
-		Assert.assertEquals(true, result);
+	@When("^Input invalid topup OTP and click Agree button$")
+	public void input_invalid_topup_otp_and_click_agree_button() throws Throwable {
+		topup.choose_submit_topup_by_link_BIDV_with("12345");
 	}
 
-	@Then("^The user see error message for the fifth time$")
-	public void the_user_see_error_message_for_the_fifth_time() throws Exception {
-		boolean result = topup.Check_message_invalid_transaction("Bạn đã nhập OTP sai quá 5 lần. Vui lòng thử lại sau!");
-		Assert.assertEquals(true, result);
+	@When("^The user input valid topup amount$")
+	public void the_user_input_valid_topup_amount() throws Throwable {
+		topup.choose_topup_by_link_with("100000");
 	}
 
-	@Then("^The user see error message for the over number input OTP$")
-    public void the_user_see_error_message_for_the_over_number_input_otp() throws Throwable {
-		boolean result = topup.Check_message_invalid_transaction("Nhập sai OTP quá số lần xác thực. Vui lòng thực hiện lại");
-		Assert.assertEquals(true, result);
-    }
-	// Nap tien thanh cong
+	@When("^The user enter the topup amount \"([^\"]*)\" lower than the topup limit and click Next$")
+	public void the_user_enter_the_topup_amount_something_lower_than_the_topup_limit_and_click_next(String amount)
+			throws Throwable {
+		topup.choose_topup_by_link_with(amount);
+	}
 
-	
+	@When("^The user enter the topup amount \"([^\"]*)\" greater than the topup limit and click Next$")
+	public void the_user_enter_the_topup_amount_something_greater_than_the_topup_limit_and_click_next(String amount)
+			throws Throwable {
+		topup.choose_topup_by_link_with(amount);
+	}
 
-	@Then("^Balance of wallet increases and Transaction has status successful$")
-	public void then_Balance_of_wallet_increases_and_Transaction_has_status_successful() throws Exception {
-		boolean result = topup.Check_result_message("Bạn đã thực hiện nạp 10,000VND thành công vào tài khoản.");
-		Assert.assertEquals(true, result);
-		System.out.print("pass message");
-		int total_balance_new = account_infor.get_main_total_balance();
-		System.out.print(total_balance_new);
-		Assert.assertEquals(total_balance_old + 10000, total_balance_new);
+	@Then("^The user see error message finish topup transaction \"([^\"]*)\"$")
+	public void the_user_see_error_message_finish_topup_transaction(String expected) throws Throwable {
+		String actual = topup.get_message_invalid_transaction();
+		Assert.assertEquals(expected, actual);
+	}
+
+	@Then("^The user see error OTP message \"([^\"]*)\"$")
+	public void the_user_see_error_otp_message_something(String expected) throws Throwable {
+		String actual = topup.get_message_input_invalid_OTP();
+		Assert.assertEquals(expected, actual);
+	}
+
+	 @Then("^Status of topup transaction is \"([^\"]*)\"$")
+	    public void status_of_topup_transaction_is_something(String expected) throws Throwable {
 		transaction_history.choose_topup_history();
-		boolean status = transaction_history.Check_status_topup("Hoàn thành");
-		Assert.assertEquals(true, status);
-		String message_transaction_from_BIDV = GetOTP.Get_message_transaction_From_BIDV();
-		Assert.assertEquals(message_transaction_from_BIDV, "-10,000VND");
+		String actual = transaction_history.get_status_transaction();
+		Assert.assertEquals(expected, actual);
 	}
 
-	
-	 
-	     // Write code here that turns the phrase above into concrete actions
-	 
-	 @Then("^The user see error message topup unsuccessful$")
-	    public void the_user_see_error_message_topup_unsuccessful() throws Throwable {
-		 boolean result = topup.Check_message_finish_transaction("Giao dịch thất bại.");
-			Assert.assertEquals(true, result);
-			System.out.print("pass message");
-			int total_balance_new = account_infor.get_main_total_balance();
-			System.out.print(total_balance_new);
-			Assert.assertEquals(total_balance_old, total_balance_new);
-			transaction_history.choose_topup_history();
-			boolean status = transaction_history.Check_status_topup("Giao dịch thất bại");
-			Assert.assertEquals(true, status);
-		}
-	 @Then("^The user see error message block OTP$")
-	    public void the_user_see_error_message_block_otp() throws Throwable {
-		 boolean result = topup.Check_message_invalid_transaction("Khóa OTP tạm thời do nhập sai OTP 5 lần liên tiếp. Vui lòng liên hệ ngân hàng để biết thêm thông tin.");
-			Assert.assertEquals(true, result);
-			System.out.print("pass message");
-	    }   
-	
 
-	 
-	@Then("^The user see error message about tranlimit$")
-	public void the_user_see_error_message_about_tranlimit() throws Exception {
-		List<String> messages = new ArrayList<String>();
-		messages.add("Giá trị tối thiểu của giao dịch là 10,000VND và tối đa là 2,000,000VND!");
-		messages.add("Giá trị tối thiểu của giao dịch là 10,000VND và tối đa là 10,000,000VND!");
-		System.out.print(messages.get(0));
-		if (this.Authenticated == false) {
-			boolean result = topup.Check_message_validate_limit(messages.get(0));
-			Assert.assertEquals(true, result);
-		} else {
-			boolean result = topup.Check_message_validate_limit(messages.get(1));
-			Assert.assertEquals(true, result);
-		}
+	@Then("^Balance of wallet increase$")
+	public void balance_of_wallet_increase() throws Throwable {
+		throw new PendingException();
 	}
 
-	
+	@Then("^The user see error message about topup tranlimit \"([^\"]*)\"$")
+	public void the_user_see_error_message_about_topup_tranlimit_something(String expected) throws Throwable {
+		String actual = topup.get_message_validate_limit();
+		Assert.assertEquals(expected, actual);
+	}
+
 }

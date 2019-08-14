@@ -17,19 +17,17 @@ import com.senpay.serenity_cucumber.pages.LoginPage;
 
 import static org.hamcrest.Matchers.hasItem;
 
-public class AccountInforSteps extends ScenarioSteps   {
+public class AccountInforSteps extends ScenarioSteps {
 
-    
 	AccountInfoPage accountinfor;
 	HomePage homepage;
-    
-    @Step
-    public int get_main_total_balance() {
-    	homepage.chooseAccount();
-         //homepage.chooseInfor_account();
-    	int total_balance = accountinfor.CheckWallet();
-        return total_balance;
-    }
-  
-    
+
+	@Step
+	public int get_main_total_balance() {
+		homepage.chooseAccount();
+		// homepage.chooseInfor_account();
+		int total_balance = accountinfor.CheckWallet();
+		return total_balance;
+	}
+
 }

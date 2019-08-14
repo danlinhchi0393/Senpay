@@ -27,16 +27,10 @@ public class DefLoginSteps extends PageSteps {
 		login.is_the_login_page();
 	}
 
-	@When("^The user input valid phone number and pincode and The user click Login button$")
-	public void the_user_input_valid_phone_number_and_pincode_and_the_user_click_login_button() throws Throwable {
-		//List<String> test = ReadExcel.GetValue("Select * from Sheet1");
-		//String username = test.get(0);
-		//System.out.print(username);
-		if (this.Authenticated == false) {
-			login.login_with("0383584138", "123456");
-		} else {
-			login.login_with("0383584138", "123456");
-		}
+	@When("^The user input valid phone number \"([^\"]*)\" and pincode \"([^\"]*)\" and The user click Login button$")
+    public void the_user_input_valid_phone_number_something_and_pincode_something_and_the_user_click_login_button(String phone, String pincode) throws Throwable {
+			login.login_with(phone,pincode);
+		
 	}
 
 	@Then("^The user should see homepage$")

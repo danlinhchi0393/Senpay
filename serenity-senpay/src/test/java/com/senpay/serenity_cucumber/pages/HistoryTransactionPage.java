@@ -17,6 +17,8 @@ public class HistoryTransactionPage  extends PageObject {
 	WebElement TypeTransaction;
 	@FindBy(css = "#MainContent_ddlTypeTransaction > option:nth-child(9)")
 	WebElement TopupTransaction;
+	@FindBy(css = "#MainContent_ddlTypeTransaction > option:nth-child(2)")
+	WebElement WithdrawTransaction;
 	@FindBy(css ="#MainContent_btSearch")
 	WebElement SearchBtn;
 	@FindBy(css ="#tablelist > tbody > tr:nth-child(1) > td:nth-child(7)")
@@ -28,6 +30,9 @@ public class HistoryTransactionPage  extends PageObject {
 
 	public void ChooseTopupTransaction() {
 		TopupTransaction.click();
+	}
+	public void ChooseWithdrawTransaction() {
+		WithdrawTransaction.click();
 	}
 
 	public void ChooseSearch() {

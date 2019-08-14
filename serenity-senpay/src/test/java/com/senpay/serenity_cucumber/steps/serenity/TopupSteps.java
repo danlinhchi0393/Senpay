@@ -40,6 +40,10 @@ public class TopupSteps extends ScenarioSteps {
 		topup.Choose_link_VTB();
 	}
 	@Step
+	public void choose_topup_by_link_agribank() {
+		topup.Choose_link_Agribank();
+	}
+	@Step
 	public void choose_topup_by_link_with(String amount) {
 		topup.InputAmount_BIDV(amount);
 		topup.Choose_Agree_BIDV_button();
@@ -52,62 +56,37 @@ public class TopupSteps extends ScenarioSteps {
 	}
 
 	@Step
-	public boolean Check_message_input_invalid_OTP(String expect) {
-		String actual_message = topup.Get_error_message();
-		System.out.print(actual_message);
-		if (actual_message.contentEquals(expect) == true)
-			return true;
-		return false;
+	public String get_message_input_invalid_OTP() {
+		String actual_message = topup.Get_error_OTP_message();
+		return actual_message;
 	}
 		@Step
-		public boolean Check_result_message(String expect) {
+		public String Check_result_message() {
 			getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 			String actual_result_message = topup.Get_result_message();
 			//System.out.print(actual_result_message);
-			if (actual_result_message.contentEquals(expect) == true)
-				return true;
-			return false;
+			return actual_result_message;
 	}
 		@Step
-		public boolean Check_message_validate_limit(String expect) {
+		public String get_message_validate_limit() {
 			getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 			String message_validate_limit = topup.Get_message_validate_limit();
-			//System.out.print(actual_result_message);
-			if (message_validate_limit.contentEquals(expect) == true)
-				return true;
-			return false;
+			return message_validate_limit;
 	}
 		@Step
-		public boolean Check_message_finish_transaction(String expect) {
+		public String get_message_finish_transaction() {
 			getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 			String message_finish_transaction = topup.Get_message_finish_transaction();
-			//System.out.print(actual_result_message);
-			if (message_finish_transaction.contentEquals(expect) == true)
-				return true;
-			return false;
+			return message_finish_transaction;
 	}
 		@Step
-		public boolean Check_message_invalid_transaction(String expect) {
+		public String get_message_invalid_transaction() {
 			getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-			String message_invalid_OTP_5times = topup.Get_message_invalid_transaction();
-			//System.out.print(actual_result_message);
-			if (message_invalid_OTP_5times.contentEquals(expect) == true)
-				return true;
-			return false;
+			String message = topup.Get_message_invalid_transaction();
+			
+			return message;
 	}
 		
-		@Step
-		public void add_tab() {
-			//String selectLinkOpeninNewTab = Keys.chord(Keys.CONTROL,"t");
-			//getDriver().findElement(By.tagName("body")).sendKeys(selectLinkOpeninNewTab);
-			Actions act = new Actions(getDriver());
-			act.keyDown(Keys.CONTROL).sendKeys("t").keyUp(Keys.CONTROL).build().perform();
-			getDriver().get("https://www.google.com");
-			getDriver().findElement(By.tagName("body")).sendKeys(Keys.CONTROL,"\t");
-			String title = getDriver().getTitle();
-			System.out.print(title);
-			getDriver().navigate().refresh();
-		}
 		
 		@Step
 		 public void takeSnapShot() throws IOException {

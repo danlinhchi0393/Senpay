@@ -234,6 +234,8 @@ public class TopupPage extends PageObject  {
 //Ngân hang LK 
 	@FindBy(css = "#link-img-bank-21 > img:nth-child(2)")
 	WebElement link_BIDV ;
+	@FindBy(css = "#link-img-bank-7 > img:nth-child(2)")
+	WebElement link_Agribank ;
 	
 	@FindBy(css = "#link-img-bank-9 > img:nth-child(2)")
 	WebElement link_VTB ;
@@ -249,7 +251,7 @@ public class TopupPage extends PageObject  {
 	WebElement submit_button ;
 	
 	@FindBy(css = "span#MainContent_Default1_lbl_err_new")
-	WebElement error_message;
+	WebElement error_OTP_message;
 	@FindBy(css = "span#MainContent_Default1_lbresult")
 	WebElement result_message;
 	
@@ -268,6 +270,9 @@ public class TopupPage extends PageObject  {
 	public void Choose_link_VTB() {
 		link_VTB.click();
 	}
+	public void Choose_link_Agribank() {
+		link_Agribank.click();
+	}
 	public void InputAmount_BIDV(String amount) {
 		Amount_cardlink.sendKeys(amount);
 	}
@@ -280,8 +285,8 @@ public class TopupPage extends PageObject  {
 	public void Choose_submit_bidv() {
 		submit_button.click();
 	}
-	public String Get_error_message() {
-		String error_message_value = error_message.getText();
+	public String Get_error_OTP_message() {
+		String error_message_value = error_OTP_message.getText();
 		return error_message_value;
 	}
 	public String Get_result_message() {

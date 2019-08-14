@@ -9,9 +9,9 @@ import net.serenitybdd.core.annotations.findby.FindBy;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.pages.PageObject;
 
-@DefaultUrl("http://sandbox.senpay.vn")
+//@DefaultUrl("http://sandbox.senpay.vn")
 //@DefaultUrl("http://stagging.senpay.vn")
-//@DefaultUrl("https://pilot.senpay.vn")
+@DefaultUrl("https://pilot.senpay.vn")
 
 public class LoginPage extends PageObject {
 	@FindBy (css = "input[type = tel]")
