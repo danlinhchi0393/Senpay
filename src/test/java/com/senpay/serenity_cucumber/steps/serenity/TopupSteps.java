@@ -43,12 +43,25 @@ public class TopupSteps extends ScenarioSteps {
 	public void choose_topup_by_link_agribank() {
 		topup.Choose_link_Agribank();
 	}
+	
+	@Step
+	public void choose_topup_by_tpbank() {
+		topup.chooseATMDomestic();
+		topup.ChooseTPbank();
+	}
+	
 	@Step
 	public void choose_topup_by_link_with(String amount) {
 		topup.InputAmount_BIDV(amount);
 		topup.Choose_Agree_BIDV_button();
 	}
-
+	@Step
+	public void choose_topup_by_tpbank_with(String amount,String name, String number) {
+		topup.InputAmount(amount);
+		topup.InputATMCardHolderNameTPB(name);
+		topup.InputATMCardNumberTPB(number);
+		topup.ChooseAgreeTPbank();
+	}
 	@Step
 	public void choose_submit_topup_by_link_BIDV_with(String OTPvalue) {
 		topup.Input_OTP(OTPvalue);
@@ -83,10 +96,13 @@ public class TopupSteps extends ScenarioSteps {
 		public String get_message_invalid_transaction() {
 			getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 			String message = topup.Get_message_invalid_transaction();
-			
 			return message;
 	}
-		
+		@Step
+		public String get_title() {
+			String title = getDriver().getTitle();
+			return title;
+	}
 		
 		@Step
 		 public void takeSnapShot() throws IOException {

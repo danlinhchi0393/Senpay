@@ -257,8 +257,7 @@ public class TopupPage extends PageObject  {
 	
 	@FindBy(css = "span#MainContent_Default1_CustomValidatorddl")
 	WebElement message_validate_limit;
-	
-	
+
 	@FindBy(css = "#DivInfoAccount > div:nth-child(1)")
 	WebElement message_finish_transaction;
 	@FindBy(css = "#MainContent_Default1_message")

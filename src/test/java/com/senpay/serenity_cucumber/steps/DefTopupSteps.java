@@ -42,15 +42,18 @@ public class DefTopupSteps {
 		home.choose_topup();
 		topup.choose_topup_by_link_VTB();
 	}
+
 	@Given("^The user choose topup by agribank$")
 	public void the_user_choose_topup_by_agribank() throws Throwable {
 		home.choose_topup();
 		topup.choose_topup_by_link_agribank();
 	}
+
 	@When("^The user input invalid topup -(\\d+)$")
 	public void the_user_input_invalid_topup(String amount) throws Exception {
-	    topup.choose_topup_by_link_with(amount);
+		topup.choose_topup_by_link_with(amount);
 	}
+
 	@When("^Input topup OTP timeout and click Agree button$")
 	public void input_invalid_topup_otp_timeout_and_click_agree_button() throws Throwable {
 		Thread.sleep(120001);
@@ -71,9 +74,9 @@ public class DefTopupSteps {
 	}
 
 	@When("^The user input valid topup \"([^\"]*)\"$")
-    public void the_user_input_valid_topup_something(String amount) throws Throwable {
-        topup.choose_topup_by_link_with(amount);
-    }
+	public void the_user_input_valid_topup_something(String amount) throws Throwable {
+		topup.choose_topup_by_link_with(amount);
+	}
 
 	@When("^The user enter the topup amount \"([^\"]*)\" lower than the topup limit and click Next$")
 	public void the_user_enter_the_topup_amount_something_lower_than_the_topup_limit_and_click_next(String amount)
@@ -99,13 +102,12 @@ public class DefTopupSteps {
 		Assert.assertEquals(expected, actual);
 	}
 
-	 @Then("^Status of topup transaction is \"([^\"]*)\"$")
-	    public void status_of_topup_transaction_is_something(String expected) throws Throwable {
+	@Then("^Status of topup transaction is \"([^\"]*)\"$")
+	public void status_of_topup_transaction_is_something(String expected) throws Throwable {
 		transaction_history.choose_topup_history();
 		String actual = transaction_history.get_status_transaction();
 		Assert.assertEquals(expected, actual);
 	}
-
 
 	@Then("^Balance of wallet increase$")
 	public void balance_of_wallet_increase() throws Throwable {
@@ -118,4 +120,22 @@ public class DefTopupSteps {
 		Assert.assertEquals(expected, actual);
 	}
 
+//Topup by Napas
+	@Given("^Choose topup from TPbank$")
+	public void choose_topup_from_tpbank() throws Throwable {
+		home.choose_topup();
+		topup.choose_topup_by_tpbank();
+	}
+
+	@When("^Input amount information card \"([^\"]*)\", \"([^\"]*)\" and \"([^\"]*)\"$")
+	public void input_amount_information_card_something_something_and_something(String amount, String name,
+			String number) throws Throwable {
+		topup.choose_topup_by_tpbank_with(amount, name, number);
+	}
+
+	@Then("^Redirect from internerbanking,see the title \"([^\"]*)\"$")
+	public void redirect_from_internerbanking_see_the_title(String expected) throws Exception {
+		String actual = topup.get_title();
+		Assert.assertEquals(expected, actual);
+	}
 }
