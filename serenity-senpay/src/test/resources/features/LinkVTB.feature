@@ -16,7 +16,6 @@ Feature: Link Senpay wallet with Viettinbank
    When Input invalid OTP from Viettinbank
    Then User see message "xxx"
    
-   
     Scenario Outline: The user input invalid information about Viettinbank card case: <case>
    Given User choose link Senpay wallet with Viettinbank
    When User enter <so_the>, <thang_phat_hanh>, <nam_phat_hanh>, <CMND> and click Agree button
