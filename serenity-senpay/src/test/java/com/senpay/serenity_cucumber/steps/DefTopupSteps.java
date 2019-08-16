@@ -23,7 +23,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import Common.*;
 
-public class DefTopupSteps extends PageSteps {
+public class DefTopupSteps {
 	@Steps
 	LoginSteps login;
 	@Steps

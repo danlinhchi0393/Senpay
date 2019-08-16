@@ -25,7 +25,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import Common.*;
 
-public class DefWithdrawVTBSteps extends PageSteps {
+public class DefWithdrawVTBSteps {
 	@Steps
 	LoginSteps login;
 	@Steps
