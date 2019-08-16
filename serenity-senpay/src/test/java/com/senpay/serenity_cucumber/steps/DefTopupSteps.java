@@ -47,6 +47,10 @@ public class DefTopupSteps extends PageSteps {
 		home.choose_topup();
 		topup.choose_topup_by_link_agribank();
 	}
+	@When("^The user input invalid topup -(\\d+)$")
+	public void the_user_input_invalid_topup(String amount) throws Exception {
+	    topup.choose_topup_by_link_with(amount);
+	}
 	@When("^Input topup OTP timeout and click Agree button$")
 	public void input_invalid_topup_otp_timeout_and_click_agree_button() throws Throwable {
 		Thread.sleep(120001);
@@ -66,10 +70,10 @@ public class DefTopupSteps extends PageSteps {
 		topup.choose_submit_topup_by_link_BIDV_with("12345");
 	}
 
-	@When("^The user input valid topup amount$")
-	public void the_user_input_valid_topup_amount() throws Throwable {
-		topup.choose_topup_by_link_with("100000");
-	}
+	@When("^The user input valid topup \"([^\"]*)\"$")
+    public void the_user_input_valid_topup_something(String amount) throws Throwable {
+        topup.choose_topup_by_link_with(amount);
+    }
 
 	@When("^The user enter the topup amount \"([^\"]*)\" lower than the topup limit and click Next$")
 	public void the_user_enter_the_topup_amount_something_lower_than_the_topup_limit_and_click_next(String amount)
