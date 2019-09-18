@@ -4,6 +4,7 @@ import net.thucydides.core.annotations.Steps;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
@@ -35,7 +36,7 @@ public class DefTopupSteps {
 	@Steps
 	TransactionHistorySteps transaction_history;
 
-	int total_balance_old;
+	int total_balance_old = DefWithdrawVTBSteps.total_balance_old;
 
 	@Given("^The user choose topup by ViettinBank$")
 	public void the_user_choose_topup_by_viettinbank() throws Throwable {
@@ -56,16 +57,16 @@ public class DefTopupSteps {
 
 	@When("^Input topup OTP timeout and click Agree button$")
 	public void input_invalid_topup_otp_timeout_and_click_agree_button() throws Throwable {
-		Thread.sleep(120001);
-		topup.choose_submit_topup_by_link_BIDV_with("12345");
+		Thread.sleep(180001);
+		topup.choose_submit_topup_by_link_BIDV_with("123456");
 	}
 
 	@When("^Input valid topup OTP and click Agree button$")
 	public void input_valid_topup_otp_and_click_agree_button() throws Throwable {
-		String OTP = GetOTP.GetOTP_From_BIDV();
+		String OTP = GetOTP.GetOTP_From_Viettinbank_link();
 		System.out.print(OTP);
 		topup.choose_submit_topup_by_link_BIDV_with(OTP);
-		// topup.choose_submit_topup_by_link_BIDV_with("123456");
+	 //topup.choose_submit_topup_by_link_BIDV_with("123456");
 	}
 
 	@When("^Input invalid topup OTP and click Agree button$")
@@ -77,7 +78,7 @@ public class DefTopupSteps {
 	public void the_user_input_valid_topup_something(String amount) throws Throwable {
 		topup.choose_topup_by_link_with(amount);
 	}
-
+	
 	@When("^The user enter the topup amount \"([^\"]*)\" lower than the topup limit and click Next$")
 	public void the_user_enter_the_topup_amount_something_lower_than_the_topup_limit_and_click_next(String amount)
 			throws Throwable {
@@ -111,7 +112,17 @@ public class DefTopupSteps {
 
 	@Then("^Balance of wallet increase$")
 	public void balance_of_wallet_increase() throws Throwable {
-		throw new PendingException();
+		int total_balance_new = account_infor.get_main_total_balance();
+		
+		System.out.println("total_balance_new=" + total_balance_new);
+		
+		System.out.println("total_balance_old before plus=" + total_balance_old);
+		
+		total_balance_old = total_balance_old + 100000;
+		
+		System.out.println("total_balance_old after plus=" + total_balance_old);
+		
+		Assert.assertEquals(total_balance_old, total_balance_new);
 	}
 
 	@Then("^The user see error message about topup tranlimit \"([^\"]*)\"$")
@@ -126,13 +137,30 @@ public class DefTopupSteps {
 		home.choose_topup();
 		topup.choose_topup_by_tpbank();
 	}
+	 @Given("^Choose topup from Viettinbank$")
+	    public void choose_topup_from_viettinbank() throws Throwable {
+		 home.choose_topup();
+			topup.choose_topup_by_vtbank();
+	    }
+	 @Given("^Choose topup from BIDV$")
+	    public void choose_topup_from_bidv() throws Throwable {
+		 home.choose_topup();
+			topup.choose_topup_by_BIDVdometic();
+	    }
 
+	    @When("^Input amount information card \"([^\"]*)\" and click Agree button$")
+	    public void input_amount_information_card_something_and_click_agree_button(String amount) throws Throwable {
+	        topup.choose_topup_by_napas_with(amount);
+	    }
 	@When("^Input amount information card \"([^\"]*)\", \"([^\"]*)\" and \"([^\"]*)\"$")
 	public void input_amount_information_card_something_something_and_something(String amount, String name,
 			String number) throws Throwable {
 		topup.choose_topup_by_tpbank_with(amount, name, number);
 	}
-
+	@When("^Input amount information card \"([^\"]*)\", \"([^\"]*)\",\"([^\"]*)\" and valid from date$")
+    public void input_amount_information_card_something_somethingsomething_and_valid_from_date(String amount, String name, String number) throws Throwable {
+        topup.choose_topup_by_viettinbank_with(amount, name, number);
+    }
 	@Then("^Redirect from internerbanking,see the title \"([^\"]*)\"$")
 	public void redirect_from_internerbanking_see_the_title(String expected) throws Exception {
 		String actual = topup.get_title();

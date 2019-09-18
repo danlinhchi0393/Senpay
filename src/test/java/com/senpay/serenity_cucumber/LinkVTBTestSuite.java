@@ -7,5 +7,6 @@ import org.junit.runner.RunWith;
 @RunWith(CucumberWithSerenity.class)
 @CucumberOptions(
 		features="src/test/resources/features/LinkVTB.feature"
+		,tags = "@test"
 		)
-public class LinkVTB {}
+public class LinkVTBTestSuite {}

@@ -31,5 +31,16 @@ public class HomeSteps extends ScenarioSteps   {
         homepage.chooseTransactions();
         homepage.chooseInfor_account();
     }
+	
+    @Step
+	public void choose_Bank_account() {
+		homepage.choose_Bank_account();
+		
+	}
+    @Step
+	public void chooseAccount() {
+		homepage.chooseAccount();
+		
+	}
     
 }

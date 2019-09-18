@@ -99,5 +99,33 @@ public static String Get_message_transaction_From_BIDV() throws MalformedURLExce
 			return transaction_amount;
 	
 } 
+
+public static String GetOTP_From_Viettinbank_link() throws MalformedURLException {
+	
+	//Set the Desired Capabilities
+	DesiredCapabilities caps = new DesiredCapabilities();
+	caps.setCapability("deviceName", "My Phone");
+	caps.setCapability("udid", "0123456789ABCDEF"); //may chindl
+	//caps.setCapability("platformVersion", "4.4.2");
+	//caps.setCapability("udid", "3300ccd2ec94c405"); // android trăng
+	caps.setCapability("platformVersion", "8.1.0");
+	caps.setCapability("platformName", "Android");
+	
+	caps.setCapability("appPackage", "com.google.android.apps.messaging");
+	caps.setCapability("appActivity", "com.google.android.apps.messaging.ui.ConversationListActivity");
+	caps.setCapability("noReset", "true");
+	AppiumDriver<MobileElement> driver = new AndroidDriver<MobileElement>(new URL("http://0.0.0.0:4723/wd/hub"), caps);
+	String Message = driver.findElement(By.xpath("//android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.TextView[1]")).getText();
+	//Tin nhăn trong máy android trắng
+	//String Message = driver.findElement(By.xpath("//android.widget.FrameLayout/android.widget.RelativeLayout/android.view.ViewGroup/android.support.v7.widget.RecyclerView/android.widget.FrameLayout[1]/android.widget.LinearLayout/android.widget.RelativeLayout/android.widget.TextView[2]")).getText();
+	//System.out.print(Message);
+	String Compare = "Ma OTP";
+	int index = Message.indexOf(Compare);
+	//System.out.print(index);
+	String OTPValue = Message.substring(index+7, index+13);
+	//System.out.print(OTPValue);
+			return OTPValue;
+	
+}
 }
 

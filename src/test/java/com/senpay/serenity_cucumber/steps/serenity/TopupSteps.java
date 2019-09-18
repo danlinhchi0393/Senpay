@@ -49,7 +49,16 @@ public class TopupSteps extends ScenarioSteps {
 		topup.chooseATMDomestic();
 		topup.ChooseTPbank();
 	}
-	
+	@Step
+	public void choose_topup_by_vtbank() {
+		topup.chooseATMDomestic();
+		topup.ChooseViettinbank();
+	}
+	@Step
+	public void choose_topup_by_BIDVdometic() {
+		topup.chooseATMDomestic();
+		topup.chooseBIDVdometic();
+	}
 	@Step
 	public void choose_topup_by_link_with(String amount) {
 		topup.InputAmount_BIDV(amount);
@@ -61,6 +70,19 @@ public class TopupSteps extends ScenarioSteps {
 		topup.InputATMCardHolderNameTPB(name);
 		topup.InputATMCardNumberTPB(number);
 		topup.ChooseAgreeTPbank();
+	}
+	@Step
+	public void choose_topup_by_napas_with(String amount) {
+		topup.InputAmount(amount);
+		topup.ChooseAgreeTopup();
+	}
+	@Step
+	public void choose_topup_by_viettinbank_with(String amount,String name, String number) {
+		topup.InputAmount(amount);
+		topup.InputATMCardHolderNameVTB(name);
+		topup.InputATMCardNumberVTB(number);
+		topup.ChooseMonth04();
+		topup.ChooseAgreeViettinbank();
 	}
 	@Step
 	public void choose_submit_topup_by_link_BIDV_with(String OTPvalue) {

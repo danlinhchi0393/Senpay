@@ -1,29 +1,40 @@
 Feature: Link Senpay wallet with Viettinbank
-
-  Scenario Outline: The user link Senpay wallet with Viettinbank successful
+Background: 
+    Given The user is staying login page
+    When The user input valid phone number "0374441716" and pincode "123456" and The user click Login button
+    When Get account balance before make transactions
+      @test
+   Scenario: The user link Senpay wallet with Viettinbank case input invalid OTP the first time
    Given User choose link Senpay wallet with Viettinbank
-   When User enter <so_the>, <thang_phat_hanh>, <nam_phat_hanh>, <CMND> and click Agree button
+    When User enter information of card with card number 9704151531339480 cmnd 091709108 and click Agree button
+  When Input invalid OTP from Viettinbank
+   Then User see message Sai OTP. Vui lòng thực hiện lại giao dịch.
+Scenario: The user link Senpay wallet with Viettinbank successful
+   Given User choose link Senpay wallet with Viettinbank
+   When User enter information of card with card number 9704151531339480 cmnd 091709108 and click Agree button
    When Input valid OTP from Viettinbank
-   Then User see Viettinbank on Listbank screen
+   Then User see Bank_Viettinbank on Listbank screen and so the "****9480"
    Then Status of link is "Đã xác thực"
-   Examples: 
-    |so_the|thang_phat_hanh|nam_phat_hanh|CMND|
-    |9704151400015559|11|17|987654321|
-   
-    Scenario: The user link Senpay wallet with Viettinbank unsuccessful
-   Given User choose link Senpay wallet with Viettinbank
-   When User enter valid information about Viettinbank card and click Link button
-   When Input invalid OTP from Viettinbank
-   Then User see message "xxx"
-   
-    Scenario Outline: The user input invalid information about Viettinbank card case: <case>
-   Given User choose link Senpay wallet with Viettinbank
-   When User enter <so_the>, <thang_phat_hanh>, <nam_phat_hanh>, <CMND> and click Agree button
 
-   Then User see message about card "<message>"
+   Scenario: The user link Senpay wallet in case Senpay wallet have link bank before
+   Given User choose link Senpay wallet with Viettinbank
+    When User enter information of card with card number 9704151531339480 cmnd 091709108 and click Agree button
+   Then User see notify about link duplicate "Bạn đã có tài khoản liên kết tại ATM Vietinbank, vui lòng xóa trước khi thêm mới hoặc chọn thêm tài khoản ngân hàng!"
+
+   Scenario Outline: The user input invalid Viettinbank card number: <case>
+   Given User choose link Senpay wallet with Viettinbank
+  When User enter information of card with card number <so_the> cmnd <CMND> and click Agree button
+   Then User see message <message>
    Examples: 
-    |case|so_the|thang_phat_hanh|nam_phat_hanh|CMND|message|
-    |số thẻ không tồn tại|111|1|1|1| số thẻ không đúng|
+   |case|so_the|CMND|message|
+   |Card number not match with Senpay account|9704151400015588|091709108|Thông tin liên kết không trùng khớp với thông tin đăng ký tại Vietinbank. Bạn vui lòng kiểm tra lại!|
+   |Card number not exists|9704230080638334|091709108|Thông tin liên kết không trùng khớp với thông tin đăng ký tại Vietinbank. Bạn vui lòng kiểm tra lại!|
+
+   Scenario: The user input invalid Viettinbank card: wrong month/year
+   Given User choose link Senpay wallet with Viettinbank
+   When User enter invalid information of card with card number "9704151531339480" cmnd "091709108" and click Agree button
+   Then User see notify about link duplicate "Bạn đã có tài khoản liên kết tại ATM Vietinbank, vui lòng xóa trước khi thêm mới hoặc chọn thêm tài khoản ngân hàng!"
+
+ 
    
-   
-   
+      

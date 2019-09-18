@@ -67,7 +67,7 @@ public class TopupPage extends PageObject  {
 	@FindBy(css = "input[type=submit]")
 	WebElement CBSAgree;
 //VietinBank	
-	@FindBy(css = "input[bankname=vietinbank]")
+	@FindBy(css = "#domestic-img-bank-9 > img:nth-child(2)")
 	WebElement ViettinBank;
 	@FindBy(css = "input#MainContent_Default1_ctl03_txtCardHolderName")
 	WebElement ATMCardHolderNameVTB;
@@ -87,7 +87,7 @@ public class TopupPage extends PageObject  {
 	@FindBy(css = "#MainContent_Default1_ctl03_btnAgree")
 	WebElement AgreeViettinbank;
 //Tpbank
-	@FindBy(css = "input[bankname=tpbank]")
+	@FindBy(css = "#domestic-img-bank-8 > img:nth-child(2)")
 	WebElement TienPhongBank;
 	
 	@FindBy(css = "input#MainContent_Default1_ctl02_txtCardHolderName")
@@ -98,6 +98,10 @@ public class TopupPage extends PageObject  {
 	
 	@FindBy(css = "#MainContent_Default1_ctl02_btnAgree")
 	WebElement AgreeTPbankbank;
+	
+	@FindBy(css = "#domestic-img-bank-21 > img:nth-child(2)")
+	WebElement BIDVdometic;
+	
 //Method
 	public void chooseATMDomestic() {
 		ATMDomestic.click();
@@ -106,7 +110,9 @@ public class TopupPage extends PageObject  {
 	public void chooseVCB() {
 		VCB.click();
 	}
-
+	public void chooseBIDVdometic() {
+		BIDVdometic.click();
+	}
 	public void InputAmount(String amount) {
 		AmountTopupATM.sendKeys(amount);
 	}

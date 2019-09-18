@@ -25,6 +25,9 @@ public class HomePage extends PageObject {
 	
 	@FindBy(css = "a.gdrt")
 	WebElement MenuWithdraw;
+
+	@FindBy(xpath  = "//*[@id='clLeftMenu']/div/div/ul/li[2]/a")
+	WebElement list_bank_acc;
 	public void chooseTransactions() {
 		TabTransaction.click();
 	}
@@ -41,5 +44,14 @@ public class HomePage extends PageObject {
 	}
 	public void chooseWithdraw() {
 		MenuWithdraw.click();
+	}
+
+	public void choose_Account() {
+		TabAccount.click();
+	}
+
+	public void choose_Bank_account() {
+		list_bank_acc.click();
+		
 	}
 }

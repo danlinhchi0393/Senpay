@@ -4,6 +4,7 @@ import net.thucydides.core.annotations.Steps;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
@@ -38,7 +39,7 @@ public class DefWithdrawVTBSteps {
 	TransactionHistorySteps transaction_history;
 	@Steps
 	WithdrawSteps withdraw;
-	int total_balance_old;
+	public static int total_balance_old;
 
 	@When("^Get account balance before make transactions$")
 	public void get_account_balance_before_make_transactions() throws Throwable {
@@ -53,7 +54,7 @@ public class DefWithdrawVTBSteps {
 
 	@When("^The user input valid withdraw amount$")
 	public void the_user_input_valid_withdraw_amount() throws Exception {
-		withdraw.choose_withdraw_with("200000");
+		withdraw.choose_withdraw_with("100000");
 	}
 
 	@Then("^The user see error message \"([^\"]*)\"$")
@@ -64,21 +65,40 @@ public class DefWithdrawVTBSteps {
 
 	@When("^The user enter the withdraw amount lower than the withdraw limit and click Next$")
 	public void the_user_enter_the_withdraw_amount_lower_than_the_withdraw_limit_and_click_Next() throws Exception {
-		withdraw.choose_withdraw_with("99990");
+		withdraw.choose_withdraw_with("94000");
 	}
 
 	@When("^The user enter the withdraw amount \"([^\"]*)\" greater than the withdraw limit and click Next$")
 	public void the_user_enter_the_withdraw_amount_something_greater_than_the_withdraw_limit_and_click_next(
 			String amount) throws Throwable {
+		int Input_amount = Integer.parseInt(amount);
+		if (total_balance_old < Input_amount) {
+			System.out.println ("Không thực hiện được case này");
+		}
+		else {
 		System.out.print(amount);
 		withdraw.choose_withdraw_with(amount);
+		}
 	}
-
+	@When("^The user enter the withdraw amount greater than the available balance \\( max \"([^\"]*)\"\\) and click Next$")
+	public void the_user_enter_the_withdraw_amount_greater_than_the_available_balance_max_and_click_Next(String max) throws Exception {
+		if(total_balance_old > Integer.parseInt(max)) {
+			System.out.print("Không thực hiện được case này");
+		}
+		else {
+		Random rd = new Random();
+		int index = Integer.parseInt(max)-total_balance_old;
+		int amount1 = total_balance_old + rd.nextInt(21);
+		String amount = String.valueOf(amount1);
+		System.out.print("Số tiền nhập: " + amount);
+		withdraw.choose_withdraw_with(amount);
+		}
+    }
 	@When("^Input invalid withdraw OTP timeout and click Agree button$")
 	public void input_invalid_withdraw_OTP_timeout_and_click_Agree_button() throws Exception {
 		// String OTP = GetOTP.GetOTP_From_Senpay();
 		// System.out.print(OTP);
-		Thread.sleep(120001);
+		Thread.sleep(180001);
 		withdraw.input_withdraw_OTP("11111");
 	}
 
@@ -105,6 +125,17 @@ public class DefWithdrawVTBSteps {
 		String actual = withdraw.get_message_about_limit();
 		Assert.assertEquals(expect, actual);
 	}
+	
+		@Then("^The user see error message about withdraw tranlimit available \"([^\"]*)\"$")
+	    public void the_user_see_error_message_about_withdraw_tranlimit_available_something(String expect) throws Throwable {
+		String actual = withdraw.get_message_about_sodu();
+		String walletText1 = actual.replace(",", "");
+		String amount = String.valueOf(total_balance_old - 5500);
+		String total = expect + amount +" VND.";
+		System.out.println (walletText1);
+		System.out.println (total);
+		Assert.assertEquals(total, walletText1);
+	}
 
 	@Then("^Status transaction is \"([^\"]*)\"$")
 	public void status_transaction_is_something(String expect) throws Throwable {
@@ -124,6 +155,6 @@ public class DefWithdrawVTBSteps {
 	public void account_balance_decrease() throws Throwable {
 		int total_balance_new = account_infor.get_main_total_balance();
 		System.out.print(total_balance_new);
-		Assert.assertEquals(total_balance_old - 100000, total_balance_new);
+		Assert.assertEquals(total_balance_old - 100000 - 5500, total_balance_new);
 	}
 }

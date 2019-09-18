@@ -6,7 +6,7 @@ import org.junit.runner.RunWith;
 
 @RunWith(CucumberWithSerenity.class)
 @CucumberOptions(features="src/test/resources/features/Topup/TopupVTB.feature"
-,tags = "@vtb"
+,tags = "@test"
 )
 
 public class TopupVTBTestSuite {}

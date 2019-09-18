@@ -26,5 +26,9 @@ public class AccountInfoPage  extends PageObject {
 		int wallet = Integer.parseInt(walletText1);
 		return wallet;
 	}
+	public String CheckWallet_original() {
+		String walletText = MainAmount.getText();
+		return walletText;
+	}
 	
 }

@@ -29,5 +29,10 @@ public class AccountInforSteps extends ScenarioSteps {
 		int total_balance = accountinfor.CheckWallet();
 		return total_balance;
 	}
+	@Step
+	public String get_main_total_balance_string() {
+		String total_balance = accountinfor.CheckWallet_original();
+		return total_balance;
+	}
 
 }

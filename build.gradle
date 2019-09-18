@@ -29,3 +29,6 @@ dependencies {
     compile('org.assertj:assertj-core:3.8.0')
 }
 gradle.startParameter.continueOnFailure = true
+serenity {
+    reports = ["email"]
+}

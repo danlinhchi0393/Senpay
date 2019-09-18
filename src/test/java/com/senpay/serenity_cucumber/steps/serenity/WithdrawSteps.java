@@ -56,6 +56,11 @@ public class WithdrawSteps extends ScenarioSteps {
 		return message;
 }
 	@Step
+	public String get_message_about_sodu() {
+		String message =withdraw.get_message_about_sodu();
+		return message;
+}
+	@Step
 	public String get_message_about_finish_tran() {
 		String message =withdraw.get_message_about_finish_tran();
 		return message;

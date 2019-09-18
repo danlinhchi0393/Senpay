@@ -14,8 +14,7 @@ import java.util.List;
 
 //@DefaultUrl("https://senpay.vn/")
 public class WithdrawPage extends PageObject {
-	//@FindBy(css = "option[value ='1001440|9|1|9704151400015559']")
-	@FindBy(css = "option[value ='1000289|1|1|")
+	@FindBy(css = "#MainContent_ddlBank > option:nth-child(2)")
 	WebElement VTB_LK;
 	@FindBy(css = "input#MainContent_txtAmount")
 	WebElement Amount_withdraw;
@@ -27,6 +26,8 @@ public class WithdrawPage extends PageObject {
 	WebElement AgreeBtn;
 	@FindBy(css = "#MainContent_messagebox2")
 	WebElement message_about_OTP;
+	@FindBy(css = "#MainContent_messagebox1")
+	WebElement message_about_sodu;
 	@FindBy(css = "#MainContent_cusCustom")
 	WebElement message_about_limit;
 	@FindBy(css = "#MainContent_ruttienstep4")
@@ -57,6 +58,10 @@ public class WithdrawPage extends PageObject {
 	
 	public String get_message_about_limit() {
 		String message= message_about_limit.getText();
+		return message;
+	}
+	public String get_message_about_sodu() {
+		String message= message_about_sodu.getText();
 		return message;
 	}
 	public String get_message_about_finish_tran() {
